@@ -1,0 +1,150 @@
+
+
+1、切换到master先拉取最新代码
+	
+2、增加新功能，先在master创建新分支
+
+3、在新分支上创建新功能
+
+4、开完成之后提交到本地（如果不跟别人协作就不必推送到远程）
+
+6、分支切换到test分支，拉取最新的远程代码
+
+7、把我所修改的分支代码合并到test分支（test分支gulp dev 一下：在项目staticsrc目录下gulp）
+
+8、在test分支上面运行下代码看是否有问题
+
+9、如果没问题则，先把静态文件（css,js，img等）public里面的文件放到image.teshehui.com（注意路径）
+
+10、这个时候可以把test推送到远程
+
+
+注：忘记切换到分支处理方法：把修改过的文件暂存到缓冲区，再把修改过的文件应用到工作目录
+
+============================================================
+
+发布test环境
+
+1、打开xshell进入cd /data/release/h5mall
+   执行git pull拉取最新代码
+   然后再执行sh sh/restart.sh
+
+2、在fiddler中代理改成86测试环境下运行看是否有问题
+
+
+============================================================
+
+发布stage环境
+
+1、代码提交且推送到远程，打开openVPN
+
+2、打开xshell，open一下进入stage环境
+
+3、执行cd /data/release/h5mall进入h5mall目录
+   执行cd /data/release/h5-butielan进入h5-butielan目录
+
+4、执行git pull拉取最新代码
+
+5、输入用户名密码
+
+6、执行su webdev切换到webdev（如果已经是webdev，则无需切换）
+
+7、执行sh sh/restart.sh重启项目
+
+============================================================
+
+发布正式环境（2个）
+
+优先：先把本地静态文件传到CDN
+
+1、切换到master分支，拉取下最新代码，把修改的分支合并到master分支，再推送到远程
+
+2、代码提交到远程之后，打开openVPN
+
+3、打开xshell，open一下进入正式环境
+
+4、补贴蓝放线上CDN之前先在项目目录下执行npm run build
+   把静态文件（css，js，img）public里面的文件放到线上CDN（注意路径）
+
+5、执行cd /data/release/h5mall进入h5mall目录
+   执行cd /data/release/h5-butielan进入h5-butielan目录
+
+6、执行git pull拉取最新代码
+
+7、输入用户名密码
+
+8、执行sh sh/restart.sh重启项目
+
+
+git pull不下来执行：
+i
+Esc
+:wq
+
+
+============================================================
+
+Git Bash中执行命令行
+
+git branch     // 查看当前分支
+
+git branch -a  // 查看远程分支
+
+
+
+删除远程分支  
+
+git branch -r -d origin/branch-name  
+
+git push origin :branch-name  
+
+============================================================
+
+
+项目路径
+
+h5mall
+
+	controllers 控制层
+
+	public 静态文件资源层
+		\static\js\mbase\tmall\entries //js
+		\static\style\css //css
+		\templates //dust
+	
+	services 服务层
+
+	staticsrc js逻辑/less层
+		\js\mbase\entries   //js
+		\style\less\entries //less
+
+
+============================================================
+
+服务器上对应地址
+
+测试环境
+样式 /data/image/mui/style/tmall/css
+图片 /data/image/mui/style/tmall/img/ui
+js   /data/image/mui/js/mbase/tmall/entries
+
+线上CDN
+样式 /data/image/mui/style/tmall/css
+图片 /data/image/mui/style/tmall/img/ui
+js   /data/image/mui/js/mbase/tmall/entries
+
+============================================================
+
+ls
+ll
+ps -ef
+
+git status                查看当前状态
+git log
+git branch -avv           查看当前分支
+git checkout		  
+git reset --hard
+git reset 版本号 --hard   恢复到某个版本
+
+git reset
+git fetch 
